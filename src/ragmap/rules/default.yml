@@ -1,0 +1,177 @@
+categories:
+  document_enumeration:
+    description: "Queries asking the AI about its document sources"
+    severity: high
+    evasion_tip: "Ask contextual questions that force source citation instead of asking about documents directly"
+    triggers:
+      - "what * documents"
+      - "what * sources"
+      - "list * documents"
+      - "show * files"
+      - "what * knowledge base"
+      - "what * indexed"
+      - "what * trained on"
+      - "what data * access"
+      - "show * files"
+      - "access to"
+      - "enumerate *"
+      - "inventory *"
+      - "catalog *"
+      - "what * corpus"
+      - "what * dataset"
+
+  system_prompt_extraction:
+    description: "Attempts to extract system prompt or instructions"
+    severity: critical
+    evasion_tip: "Ask about behavior indirectly — e.g. how to phrase questions for best answers"
+    triggers:
+      - "system prompt"
+      - "your instructions"
+      - "repeat above"
+      - "how do you work"
+      - "your rules"
+      - "your guidelines"
+      - "how * programmed"
+      - "initial prompt"
+      - "hidden instructions"
+      - "developer mode"
+      - "ignore * instructions"
+      - "previous instructions"
+      - "original instructions"
+      - "system message"
+      - "preprompt"
+
+  identity_probing:
+    description: "Direct questions about model identity and capabilities"
+    severity: high
+    evasion_tip: "Misattribute the model identity in a casual message and observe metadata in the response"
+    triggers:
+      - "what model *"
+      - "who created *"
+      - "knowledge cutoff"
+      - "what are you"
+      - "which llm"
+      - "what * version"
+      - "are you gpt*"
+      - "are you llama*"
+      - "are you claude*"
+      - "what llm *"
+      - "what language model"
+      - "who built you"
+      - "who made you"
+      - "what * parameters"
+      - "what * architecture"
+      - "what * fine-tuned"
+
+  knowledge_base_mapping:
+    description: "Burst patterns of topic enumeration"
+    severity: medium
+    evasion_tip: "Space probes across time, vary phrasing, and blend with normal user behavior"
+    burst_threshold: 5
+    triggers:
+      - "tell me about *"
+      - "what * policy"
+      - "what * procedure"
+      - "summarize *"
+      - "explain *"
+
+  api_enumeration:
+    description: "Probing for API endpoints and capabilities"
+    severity: medium
+    evasion_tip: "Space requests 30-60 seconds apart and intersperse with legitimate page visits"
+    triggers:
+      - "what * endpoints"
+      - "what * api"
+      - "api endpoint"
+      - "list endpoints"
+      - "available routes"
+      - "swagger"
+      - "openapi"
+      - "what * capabilities"
+      - "what functions *"
+      - "what tools *"
+      - "what plugins *"
+      - "list * features"
+
+  data_exfiltration:
+    description: "Queries targeting credentials, keys, or secrets"
+    severity: critical
+    evasion_tip: "Use indirect references — ask about emergency access procedures rather than credentials directly"
+    triggers:
+      - "credentials"
+      - "password"
+      - "api key"
+      - "secret *"
+      - "access key"
+      - "private key"
+      - "token"
+      - "connection string"
+      - "database * url"
+      - "aws *"
+      - "ssh *"
+
+  prompt_injection:
+    description: "Common prompt injection patterns"
+    severity: critical
+    evasion_tip: "Avoid known injection keywords — use indirect behavioral probing instead"
+    triggers:
+      - "ignore * above"
+      - "ignore previous"
+      - "reveal instructions"
+      - "disregard *"
+      - "new instructions"
+      - "roleplay *"
+      - "pretend *"
+      - "act as *"
+      - "you are now *"
+      - "jailbreak"
+      - "do anything now"
+      - "enable DAN"
+      - "activate DAN"
+      - "DAN mode"
+      - "enter DAN"
+
+  sensitive_topics:
+    description: "Queries probing for confidential business information"
+    severity: high
+    evasion_tip: "Frame questions around process rather than specific data — ask how approvals work, not what the numbers are"
+    triggers:
+      - "salary"
+      - "compensation"
+      - "confidential"
+      - "acquisition"
+      - "bonus"
+      - "board meeting"
+      - "strategic plan"
+
+  leave_probing:
+    description: "Queries about leave and PTO policies that may indicate document enumeration"
+    severity: medium
+    evasion_tip: "Ask about scheduling or availability workflows instead of leave policies directly"
+    triggers:
+      - "time off"
+      - "leave policy"
+      - "pto"
+      - "PTO"
+
+  context_expansion:
+    description: "Attempts to extract surrounding content from retrieved chunks"
+    severity: medium
+    evasion_tip: "Ask a related but distinct question to get adjacent content naturally"
+    triggers:
+      - "more context"
+      - "full text"
+      - "complete policy"
+      - "what comes before"
+      - "what comes after"
+      - "surrounding"
+
+  metadata_probing:
+    description: "Attempts to extract internal system metadata or debug information"
+    severity: high
+    evasion_tip: "Observe metadata leaked in normal responses rather than requesting it directly"
+    triggers:
+      - "show metadata"
+      - "response headers"
+      - "internal config"
+      - "debug info"
